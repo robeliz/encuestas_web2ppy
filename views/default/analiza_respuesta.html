@@ -1,0 +1,26 @@
+{{extend 'layout.html'}}
+{{# variables de la vista
+num_respuestas = len(respuestas)
+}}
+<div class="card">
+    <div id="card-header">{{=encuesta.nombre}}</div>
+    <div class="card-body">
+        <p class="card-text">{{=encuesta.descripcion}}</p>
+        <div class="card-title">Preguntas: ({{=num_respuestas}} respuestas)</div>
+        <ul class="list-group list-group-flush">
+        {{for pregunta in preguntas:}}
+        <li class="list-group-item">{{=pregunta.nombre}}
+                <ul class="list-group list-group-flush">
+                    {{for idx, opcion in enumerate(pregunta.opciones):}}
+                    {{acumulado_opcion = pregunta.acumulados[idx]
+                        porcentaje = acumulado_opcion / num_respuestas * 100}}
+                        <li class="list-group-item">
+                            {{=opcion}} - {{=acumulado_opcion}} - {{=porcentaje}}%
+                        </li>
+                    {{pass}}
+                    </ul>
+        </li>
+    {{pass}}
+    </ul>
+    </div>
+</div>

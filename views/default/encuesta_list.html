@@ -1,0 +1,26 @@
+{{extend 'layout.html'}}
+
+<h1>Seleccione una encuesta</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Título</th>
+      <th scope="col">Descripción</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {{for encuesta in encuestas:}}
+    <tr>
+      <th scope="row">{{=encuesta.id}}</th>
+      <td>{{=encuesta.nombre}}</td>
+      <td>{{=encuesta.descripcion}}</td>
+      <td>
+          <a href="{{=URL('encuesta', args=encuesta.id)}}" class="btn btn-primary">Ir a la encuesta</a>
+      </td>
+    </tr>
+  {{pass}}
+  </tbody>
+</table>

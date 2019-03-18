@@ -1,0 +1,154 @@
+Python
+------
+- 2.x -> hasta 2020
+- 3.x -> producción
+
+Gestor de paquetes
+------------------
+pip
+pip install nombre_del_paquete      # instala
+pip install -U nombre_del_paquete   # actualiza
+
+Entornos virtuales (pipenv) - pip y virtualenv
+----------------------------------------------
+- instalaciones aisladas de python + paquetes del entorno
+pip install --user pipenv    # instala pipenv a nivel de usuario
+- un pipenv vive en un directorio
+mkdir entorno && cd entorno
+pipenv install --python ruta_al_interprete_deseado  # versión del intérprete
+pipenv shell    # activa el entorno virtual
+pipenv install nombre_del_paquete   # instala paquete en el entorno
+
+Jupyter (Python + Web + *Kernel)
+--------------------------------
+- Un kernel es un "intérprete"
+- El cliente puede ejecutar código de cualquier kernel
+- Una celda es un contenedor de código o texto
+pip install ipython jupyter    # instala en el sistema
+pipenv install ipython jupyter # instala en el entorno virtual
+jupyter notebook --notebook-dir ruta_al_directorio_de_notebooks
+
+Python - sintaxis
+-----------------
+*.py  -> módulo
+a = 35   # identificador = valor
+números: 12, 3.4
+cadenas: 'sdhfkjah', "asdfhas", "hola\ncaracola"
+cadenas de varias líneas:
+'''
+kljfhasdkhjf
+asdklfaksdhjfkhja
+adslkfhaskjhdfa
+'''
+listas: l = [1, 2, 'hola'] -> l[0] = 23 -> [23, 2, 'hola']
+tuplas: t = (1, 2,  'mola') inmutables
+diccionarios: d = {'k1': valor1, 1: '34'} -> d['k1'], d.get(1)
+conjuntos: c = {1, 2, 3} -> valores únicos
+
+"todo es un objeto"
+
+class NombreClase(K1, K2, ...):   # clase
+	k_att = valor
+
+	def __init__(self, ar1, ar1, ..):   # contructor
+		....
+
+def nombre(a1, a2, ...):
+	# los bloques de código están indentados
+	# "la indentación debe ser coherente"  PEP8 -> 4 espacios
+
+	return valor   # no es obligatorio
+
+Estructuras de control
+if expresion:
+	...
+	...
+elif expresion:
+	...
+    ...
+else:
+	...
+	...
+
+for item in contenedor:
+	....
+	....
+
+while expresion:
+	...
+	...
+
+try:
+	...
+	...
+except error:
+	...
+	...
+
+Decoradores
+- función que decora otra función
+- modifica el funcionamiento de la función decorada sin modificar su código
+@decorador
+def funcion():
+	pass    # instrucción que no hace nada
+
+Web2py
+------
+Framework Python (Python + Bootstrap + jQuery)
+- MVC: Modelo - Vista - Controlador
+- Instalaciones
+	- Binaria: no necesita Python
+	- Fuente: necesita una instalación de Python
+web2py.exe
+python web2py.py
+
+- aplicación plantilla: welcome
+- interfaz administrativa (IDE)
+
+Directorios
+- applications -> con un subdirectorio por cada apliación
+	- admin -> interfaz administrativa Web2py para todo el entorno
+	- examples ->
+	- welcome -> plantilla
+	- app0
+		- controllers -> controladores
+			ficheros .py que contienen funciones (acciones)
+		- models -> modelos - representación de los datos
+			ficheros .py 
+		- views ->
+			- controlador0
+				tendrán el mismo nombre que la acción
+				ficheros .html que renderizan la salida de las acciones
+- gluon -> código fuente de Web2py + contribuciones
+- site-packages -> paquetes Python disponibles para todas las aplicaciones
+- logs
+- scripts: utilidades
+
+Flujo
+URL: http://hostname/app/c/a[.html]/p1/p2?v1=12&v2=hola
+	app -> init o welcome
+	c -> default
+	a -> index
+cliente -> peticion -> servidor -> web2py -> servidor -> respuesta -> cliente
+
+Objetos globales que viven en el ciclo de petición->respuesta
+request -> petición
+- request.args -> lista de argumentos de la petición [p1, p2]
+- request.vars -> diccionario de variables de la petición {'v1': '12', 'v2': 'hola'}
+	- http://hostname/app/c/a[.html]/1
+	post_id = request.args(0, cast=int)   # post_id es un entero
+	post_id = int(request.args(0))        # post_id es un entero
+response -> respuesta
+
+acción -> es una función sin parámetros y cuyo nombre no empieza por "__"
+- devuelve:
+	- cadena de texto -> se envía directamente (no se procesa por una vista)
+	- diccionario -> se procesa por una vista
+def saluda():
+	return dict()   # -> se procesará por la vista saluda.html
+
+modelo -> objeto que representa una entidad de una "base de datos"
+- abstrae del motor de bb.dd.
+- entiende el dialecto
+
+vista -> transforma los datos provistos por la acción al formato deseado

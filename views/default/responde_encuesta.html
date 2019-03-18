@@ -1,0 +1,27 @@
+{{extend 'layout.html'}}
+<div class="card">
+    <div id="card-header">{{=encuesta.nombre}}</div>
+    <div class="card-body">
+        <p class="card-text">{{=encuesta.descripcion}}</p>
+        <div class="card-title">Preguntas:</div>
+        <ul class="list-group list-group-flush">
+            <form action="#" enctype="multipart/form-data" method="post">
+                {{for pregunta in preguntas:}}
+                <li class="list-group-item">
+                    {{=pregunta.enunciado}}<br>
+                    <ul class="list-group list-group-flush">
+                    {{for idx, opcion in enumerate(pregunta.respuesta_text):}}
+                        <li class="list-group-item">
+                        <input type="radio" name="pregunta-{{=pregunta.id}}" value={{=idx}}> {{=opcion}}
+                        </li>
+                    {{pass}}
+                    </ul>
+                </li>
+                {{pass}}
+                <br>
+                <input type="submit" class="btn btn-primary">
+                {{=form.hidden_fields()}}
+            </form>
+        </ul>
+    </div>
+</div>

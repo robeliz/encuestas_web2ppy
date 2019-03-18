@@ -1,0 +1,15 @@
+{{extend 'layout.html'}}
+<div class="card">
+    <div id="card-header">{{=encuesta.nombre}}</div>
+    <div class="card-body">
+        <p class="card-text">{{=encuesta.descripcion}}</p>
+        <div class="card-title">Preguntas:</div>
+        <ul class="list-group list-group-flush">
+        {{for pregunta in preguntas:}}
+        <li class="list-group-item">{{=pregunta.enunciado}}</li>
+    {{pass}}
+    </ul>
+    <br>
+        {{=form}}
+    </div>
+</div>
